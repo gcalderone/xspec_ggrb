@@ -1,0 +1,145 @@
+========================  GGRB spectral model  ========================
+
+This package contains the GGRB spectral model suitable to be used in XSPEC
+(see http://heasarc.gsfc.nasa.gov/xanadu/xspec/manual/XSappendixLocal.html)
+
+
+This model has been used to perform the gamma-ray burst spectral
+analysis on Fermi/GBM data discussed in MNRAS, 448, 403C, 2015:
+
+"There is a short gamma-ray burst prompt phase at the beginning of
+each long one"
+
+Authors: Calderone, G.; Ghirlanda, G.; Ghisellini, G.; Bernardini,
+M. G.; Campana, S.; Covino, S.; D'Avanzo, D'Elia, V.; Melandri, A.;
+Salvaterra, R.; Sbarufatti, B.; Tagliaferri, G.
+
+ADS: http://adsabs.harvard.edu/abs/2015MNRAS.448..403C
+
+
+
+*** INTRODUCTION
+
+The GGRB can be used as a spectral model to fit Gamma-Ray Burst
+(GRB) spectra.  It is designed to replace both the cutoff power law
+(CUTOFFPL) and the Band (GRBM, Band et al., 1993, ApJ, 413, 281)
+spectral models.
+
+The main advantages of the GGRB model are:
+
+ - it uses an integrated flux (in an energy band defined by the user)
+   as a free parameter in the fit, while both the CUTOFFPL and GRBM
+   models use a model normalization at a given energy.  This is very
+   useful when we are interested in the integrated flux in a given
+   band, since we do not have to propagate the parameter uncertainties
+   through the parameter covariance matrix.  A possible alternative
+   would be to use the CFLUX convolution model (already available in
+   XSPEC), although it requires the integration energy range to lie
+   within the band defined in the detector response matrix.  GGRB
+   provides a greatest flexibility since it relaxes this requirement;
+
+ - both the peak energy and the integrated flux are parametrized ith
+   logarithmic quantities (log_Ep and log_Flux).  This results in
+   simpler and more symmetric parameter uncertainties, with respect to
+   their linear counterparts (see Cabrera et al., 2007, MNRAS, 382,
+   342);
+
+
+
+*** MODEL PARAMETERS
+
+The GGRB model has eight parameters:
+
+1 - alpha:    the photon spectral index for energies smaller than the
+              peak energy;
+
+2 - beta:     the photon spectral index for energies greater than the
+              peak energy; (only for the Band model);
+
+3 - log_Ep:   the logarithm of the energy of the spectrum peak in the
+              nuFnu representation [keV];
+
+4 - log_Flux: the logarithm of the integrated flux (in units of erg
+              s^-1 cm^-2) in the energy band defined by Emin and Emax;
+
+5 - Emin:     lower limit of the integration energy band [keV];
+
+6 - Emax:     higher limit of the integration energy band [keV];
+
+7 - opt:      option setting to select the spectral model:
+              - 0: cutoff power law
+              - 1: Band model
+
+8 - norm:     overall model normalization
+
+
+
+*** USAGE
+
+The GGRB model is an XSPEC additive model designed to replace the
+CUTOFFPL and GRBM spectral models in GRB spectral fitting.  The opt
+parameter is used to select the appropriate spectral model: either the
+cutoff power law (opt=0) or the Band model (opt=1).  The opt
+parameter must be freezed for fitting.
+
+The alpha parameter is either the photon spectral index of the
+cutoff powerlaw or the low-energy photon spectral index of the Band
+model.
+
+The beta parameter is the high-energy photon spectral index of the
+Band model.  When the cutoff power law model is selected (opt=0) the
+beta parameter must be freezed for fitting.
+
+The log_Ep parameter is the logarithm (base 10) of the energy of the
+spectrum peak in the nuFnu representation.  Note however that the
+spectrum will have a peak only if alpha>-2 and alpha>beta.
+
+The log_Flux parameter is the logarithm (base 10) of the integrated
+flux in the energy band defined by Emin and Emax.  The Emin and Emax
+parameters must be freezed for fitting.
+
+The norm parameter must be set to 1 and freezed during fitting, since
+the model normalization is provided by the log_Flux parameter.
+
+An example of the usage of the GGRB model is given in the
+test_ggrb.xcm file.
+
+
+
+*** INSTALL
+
+In order to install the model to a local directory (say
+~/xspec_models) on a UNIX-like platform run these commands:
+
+heainit
+rm -rf   ~/xspec_models/ggrb
+mkdir -p ~/xspec_models/ggrb
+cp ggrb.dat ggrb.cxx ~/xspec_models/ggrb
+echo "initpackage pkg_ggrb ggrb.dat $HOME/xspec_models/ggrb" | xspec
+
+
+To automatically load the GGRB package each time you start XSPEC add
+the following line to your XSPEC configuration file (typically
+~/.xspec/xspec.rc)
+
+lmod pkg_ggrb $HOME/xspec_models/ggrb
+
+
+
+*** LICENSE
+
+Copyright 2014 Giorgio Calderone (giorgio.calderone@gmail.com)
+
+XSPEC_GGRB is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+XSPEC_GGRB is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+

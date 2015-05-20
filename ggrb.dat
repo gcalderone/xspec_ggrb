@@ -1,0 +1,26 @@
+#
+# Copyright 2014-2015 Giorgio Calderone (giorgio.calderone@gmail.com)
+#
+# This file is part of XSPEC_GGRB.
+#
+# XSPEC_GGRB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# XSPEC_GGRB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ggrb         7  0.  1.e20    C_ggrb    add    0 0
+alpha       " "              -1.      -1.7  -1.7         3.      4.       0.01
+beta        " "              -2.3     -6    -5          -1.7    -1.7      0.01
+log_Ep      keV               3       -3    -2           6.      7.       0.05
+log_Flux    "erg/s/cm2"      -6      -16   -15          10.     11.       0.01
+Emin        keV              10        0.1   0.1         1.e6    1.e6    -1
+Emax        keV              100       0.1   0.1         1.e6    1.e6    -1
+opt         " "               1        0     0           1       1       -1

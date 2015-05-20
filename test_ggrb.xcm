@@ -1,0 +1,95 @@
+#
+# Copyright 2014-2015 Giorgio Calderone (giorgio.calderone@gmail.com)
+#
+# This file is part of XSPEC_GGRB.
+#
+# XSPEC_GGRB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# XSPEC_GGRB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+#Define a suitably energy grid
+energies 8 10000 1000 log
+
+
+#Load model
+mo ggrb
+/*
+
+#Model normalization (parameter 8) must always be fixed
+freeze 8
+
+
+
+#Plot model in nuFnu
+cpd /xw
+pl eemodel
+
+
+#The spectrum in nuFnu has a peak in Ep as long as a>-2 and a>b.
+
+
+#Parameter 5 and 6 (Emin and Emax) must be fixed.  These are the
+#integration limits for the flux.  User can choose values according to
+#their needs
+
+new 5 200
+new 6 1000
+
+
+#The logarithm(10) of the integrated flux [erg s^-2 cm^-2] between
+#Emin and Emax is parameter 3 (log_Flux).
+flux 200 1000
+
+
+#Note that by varying any of the parameters you change the
+#normalization of the model, while the integrated flux is constant.
+
+new 1 0
+pl
+flux 200 1000
+
+
+new 1 -1.7
+pl
+flux 200 1000
+
+
+new 2 -2
+pl
+flux 200 1000
+
+
+new 2 -1.7
+pl
+flux 200 1000
+
+
+new 1 -1
+new 2 -3
+pl
+flux 200 1000
+
+
+
+
+#Use a cutoff power law instead of Band model
+new 7 0
+pl
+flux 200 1000
+
+
+new 1 0
+pl
+flux 200 1000
+
+
