@@ -111,7 +111,6 @@ test_ggrb.xcm file.
 In order to install the model to a local directory (say
 ~/xspec_models) on a UNIX-like platform run these commands:
 
-heainit
 rm -rf   ~/xspec_models/ggrb
 mkdir -p ~/xspec_models/ggrb
 cp ggrb.dat ggrb.cxx ~/xspec_models/ggrb
@@ -128,7 +127,7 @@ lmod pkg_ggrb $HOME/xspec_models/ggrb
 
 *** LICENSE
 
-Copyright 2014 Giorgio Calderone (giorgio.calderone@gmail.com)
+Copyright 2014-2015 Giorgio Calderone (giorgio.calderone@gmail.com)
 
 XSPEC_GGRB is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
